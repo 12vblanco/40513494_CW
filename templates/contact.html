@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block title %} The Orchard Contact {% endblock %}
+{%block content %}
+<div
+  class="hero-section bg-black d-flex flex-column justify-content-center align-items-center"
+>
+  <div
+    class="container contact-img p-3 mt-5 bg-white b-radius"
+    style="width: 400px"
+  >
+    <section>
+      <h2>Contact Us</h2>
+      <p>Address: <br />1 Street<br />Edinburgh, UK</p>
+
+      <p>Phone:<br />1234 567 890</p>
+
+      <p>Email:<br />info@info.com</p>
+    </section>
+
+    <section>
+      <h3>Find us:</h3>
+      <iframe
+        class="d-flex justify-content-between align-items-center"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2234.9442012511226!2d-3.216395353720095!3d55.93300522358097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c7094d1a3ff9%3A0x63b967e8d1488094!2sEdinburgh%20Napier%20University%20Merchiston%20Campus!5e0!3m2!1sen!2suk!4v1698324547028!5m2!1sen!2suk"
+        width="100%"
+        height="200"
+        loading="lazy"
+      ></iframe>
+    </section>
+  </div>
+</div>
+{% endblock %}
+
+<!-- The basic inheretance template was obtained from the flask 
+documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheritance/  -->

@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %} The Orchard Delete Booking {%
+endblock %} {%block content %}
+
+<div
+  class="hero-section bg-white d-flex flex-column justify-content-center align-items-center"
+>
+  <div class="bg-white p-2 b-radius table-responsive-md">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %} {% endif %} {% endwith %}
+    <h2 class="f-res">Booking List</h2>
+    <!-- bootstrap table from  https://getbootstrap.com/docs/4.0/content/tables/-->
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="centre">Id</th>
+          <th scope="col" class="centre">Name</th>
+          <th scope="col" class="centre">Email</th>
+          <th scope="col" class="centre">Date</th>
+          <th scope="col" class="centre">Time</th>
+          <th scope="col" class="centre">Table</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      {% for booking in bookings %}
+      <tbody>
+        <tr>
+          <th scope="row">{{ booking[0] }}</th>
+          <td class="">{{ booking[1] }}</td>
+          <td class="">{{ booking[2] }}</td>
+          <td class="">{{ booking[3] }}</td>
+          <td class="centre">{{ booking[4] }}</td>
+          <td class="centre">{{ booking[5] }}</td>
+          <td>
+            <!-- delete button inspired by https://stackoverflow.com/questions/25925024/how-to-delete-items-from-database-using-a-flask-framework-->
+            <form
+              action="{{ url_for('delete', booking_id=booking[0]) }}"
+              method="post"
+            >
+              <input type="submit" value="Delete" />
+            </form>
+          </td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+    <div class="form-group">
+      <a href="/" class="btn btn-primary">Logout</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+<!-- The basic inheretance template was obtained from the flask 
+documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheritance/  -->

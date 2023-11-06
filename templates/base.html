@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<!-- The basic inheretance template was obtained from the flask 
+documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheritance/  -->
+
+<html lang="en">
+  <head>
+    {%block head%}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- CSS file -->
+    <link rel="stylesheet" href="/static/assets/css/styles.css" />
+    {%endblock%}
+  </head>
+
+  <body>
+    <!-- Navigation & header -->
+    <header
+      id="header"
+      class="header bg-black text-white p-3 d-flex justify-content-between align-items-center"
+    >
+      <!-- Logo -->
+      <a href="/"><img
+        src="/static/assets/images/logo.png"
+        alt="Logo"
+        width="250"
+        loading="lazy"
+      /></a>
+      <!-- Navigation menu -->
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/menu">Menu</a>
+        </li>
+      </ul>
+    </header>
+    <!-- Main section to include the other templates-->
+    <section id="content">{% block content %}{% endblock %}</section>
+    <!-- Footer -->
+    <footer
+      class="footer bg-black text-white p-3 flex-column justify-content-center align-items-center"
+    >
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Opening hours -->
+        <div
+          class="d-flex flex-column justify-content-center align-items-center"
+          style="height: 200px"
+        >
+          <strong class="centre">Opening Hours:</strong>
+          <!-- Opening hours dynamically generated from a JavaScript file -->
+          <ul class="openingjs">
+        </div>
+        <!-- Footer logo and address -->
+        <div
+          class="d-flex flex-column justify-content-left align-items-left"
+        >
+          <img
+            src="/static/assets/images/logo.png"
+            alt="Logo"
+            width="150"
+            loading="lazy"
+          />
+          <address class="mt-2">
+            123 Main St.<br />
+            Edinburgh, UK<br />
+            Phone: 1234567890<br />
+            Email: info@info.com
+          </address>
+        </div>
+      </div>
+      <!-- Copyright information -->
+      <div class="copy d-flex justify-content-center align-items-center">
+        2023 - All rights reserved
+      </div>
+    </footer>
+    <!-- JavaScript file -->
+    <script src="/static/assets/js/script.js"></script>
+  </body>
+</html>
+

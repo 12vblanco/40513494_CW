@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %} The Orchard Admin {% endblock %}
+{%block content %}
+
+<div
+  class="hero-section bg-black d-flex flex-column justify-content-center align-items-center"
+>
+  <form action="/admin" method="post" class="bg-white p-3 b-radius">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %} {% endif %} {% endwith %}
+    <h2 class="f-res">Admin login</h2>
+    <!-- to generate hidden fields for CSRF's https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/ -->
+    {{ form2.hidden_tag() }}
+    <div class="form-group">
+      {{ form2.user.label }} {{ form2.user(class="form-control", required=True)
+      }}
+    </div>
+    <!--form group bootstrap styling -->
+    <div class="form-group">
+      <!--form label with attributes and bootstrap classes -->
+      {{ form2.password.label }} {{ form2.password(class="form-control",
+      required=True) }}
+    </div>
+    <div class="form-group">{{ form2.submit(class="btn btn-primary") }}</div>
+  </form>
+</div>
+
+{% endblock %}
+
+<!-- The basic inheretance template was obtained from the flask 
+documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheritance/  -->
