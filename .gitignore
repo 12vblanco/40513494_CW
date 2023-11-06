@@ -11,5 +11,5 @@ build/
 node_modules/
 yarn.lock
 
-
+# other
 .DS_Store
