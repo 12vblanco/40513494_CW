@@ -18,4 +18,4 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
 # to run https: flask run --cert=server.crt --key=server.key
 # to run http: flask run 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
