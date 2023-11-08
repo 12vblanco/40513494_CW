@@ -107,3 +107,13 @@ def delete(booking_id):
         con.close()
         # Stay if there are bookings
         return render_template('delete.html', bookings=bookings)
+
+
+# Error handling from https://flask.palletsprojects.com/en/2.3.x/errorhandling/
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404_error.html'), 404
+
+@app.errorhandler(500)
+def page_not_found(error):
+    return render_template('404_error.html'), 500

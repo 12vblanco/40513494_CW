@@ -3,7 +3,7 @@
 :root {
   --dark: #000000;
   --white: #ffffff;
-  --accent: #d43533;
+  --accent: #ed1512;
   --gold: #a18224;
 }
 
@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  color: var(--gold);
+  color: var(--accent);
   text-decoration: none;
 }
 
