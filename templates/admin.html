@@ -4,7 +4,7 @@
 <div
   class="hero-section bg-black d-flex flex-column justify-content-center align-items-center"
 >
-  <form action="/admin" method="post" class="bg-white p-3 b-radius">
+  <form action="/admin" method="post" class="bg-white p-4 b-radius">
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %}
     <div class="alert alert-{{ category }}">{{ message }}</div>

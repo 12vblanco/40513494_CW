@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %} The Orchard Home {% endblock %}
 {%block content %}
-<div class="hero-section">
+<section class="hero-section border-gold">
   <!--container styling from bootstrap and custom CSS -->
   <div class="container p-3 mt-5 bg-white b-radius" style="width: 400px">
     <h2 class="f-res">BarBench Booking</h2>
@@ -11,53 +11,82 @@
     messages %} {% for category, message in messages %}
     <div class="alert alert-{{ category }}">{{ message }}</div>
     {% endfor %} {% endif %} {% endwith %}
-    <!-- Error in validation https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/-->
-    {% for field, errors in form.errors.items() %}
-    <div class="errors">
-      {% for error in errors %}
-      <div class="alert alert-danger">{{ error }}</div>
-      {% endfor %}
-    </div>
-    {% endfor %}
 
+    <!--From styling from bootstrap docs https://getbootstrap.com/docs/4.0/components/forms/-->
     <form action="/" method="post">
       <!-- A hidden tag for wtforms to generate hidden tokens for CSRF's https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/ -->
       {{ form.hidden_tag() }}
-      <div class="form-group">
-        {{ form.name.label }} {{ form.name(class="form-control", required=True)
-        }}
-      </div>
-      <!--form group styling from bootstrap -->
-      <div class="form-group">
-        <!--form label and field with attributes and bootstrap classes -->
-        {{ form.email.label }} {{ form.email(class="form-control",
-        required=True) }}
-      </div>
-      <div class="form-group">
-        <!--min current date to remove previous days from the datepicker  -->
-        {{ form.booking_date.label}} {{form.booking_date(class="form-control",
-        type="date",required=True, min=current_date) }}
-      </div>
-      <!--time is limited dy the dropdown configuration  -->
-      <div class="form-group">
-        {{ form.time.label }} {{ form.time(type="time", class="form-control",
-        required=True) }}
-      </div>
-      <!--and table number is equaly limited by the dropdown configuration  -->
-      <div class="form-group">
-        {{ form.table_num.label}} {{ form.table_num(class="form-control",
-        required=True)}}
-      </div>
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="form-group">{{ form.submit(class="btn btn-primary") }}</div>
         <div class="form-group">
-          <a href="admin" class="btn btn-link btn-sm text-dark">Admin login</a>
+            <label for='name'>Your name</label>
+            <input class='form-control' type='text' id='name' name='name' required></input>
         </div>
-      </div>
-    </form>
-  </div>
-</div>
-{% endblock %}
+        <div class="form-group">
+            <label for='email'>Your email</label>
+            <input class='form-control' type='email' id='email' name='email' required></input>
+        </div>
+        <div class="form-group">
+            <label for='booking_date'>Which day?</label>
+            <input class='form-control' type='date' id='booking_date' name='booking_date' min={{current_date}} required></input>
+        </div>
+        <div class="form-group">
+            <label for='time'>What time?</label>
+            <select class='form-control' id='time' name='time' required><option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option></select>
+        </div>
+        <div class="form-group">
+            <label for="table_num">Choose table:</label>
+            <select id="table_num" name="table_num" class="form-control" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+      
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="form-group">
+              <div class="form-check">
+                
+              </div>
+              <button type="submit" class="btn btn-primary">Book now</button> 
+            </div>
+            <a href="admin" class="btn btn-link btn-sm text-dark">Admin login</a>
+          </div>
+          <!--just an example of consent to use the data although in a real application the format would have to be different to comply wit hlegislation-->
+          <p class="small form-text centre">By clicking 'Book now' you accept the <a href='/terms'>terms</a></p>
 
-<!-- The basic inheretance template was obtained from the flask 
-documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheritance/  -->
+        </form>
+  </div>
+</section>
+<!--Food and drinks section of the pub's website-->
+<div class="container">
+
+<section class="food-drink-section p-5 bg-black" >
+    <div class="row d-flex justify-content-evenly align-items-center">
+            <div class="col-md-6 p-4">
+            <h3>Food like your gran's</h3>
+                <p class="text-left text-white">We serve the best pub food in town, Seasonal ingredients from our seleted local producers. Come to try our menu we have something for everyone. The most suculent dishes with the friendliest atmosphere! </br>Open seven days a week you can reserve a table now using the in-house booking system!!</p>
+        </div>
+        <div class="col-md-6 p-4 text-center">
+            <!--image from https://www.pexels.com/photo/cooked-food-on-white-ceramic-plates-on-wooden-table-4451666/-->
+            <img src="static/assets/images/pexels-stacey-koenitz-r-4451666.jpg" width="400px" class="img-fluid b-radius" alt="pub food">
+        </div>
+    </div>
+<div class="container">
+
+    <div class="row d-flex justify-content-evenly align-items-center">
+        <div class="col-md-6 p-4 text-center">
+            <!--image from https://www.pexels.com/photo/icee-drinks-with-milk-in-plastic-cups-on-black-wooden-tray-9557122/-->
+            <img src="static/assets/images/pexels-ugur-tandogan-9557122.jpg" width="400px" class="img-fluid b-radius" alt="pub food">
+        </div>
+        <div class="col-md-6 p-4">
+            <h3>Drinks for every occasion</h3>
+            <p class="text-left text-white">We have the best drinks and cocktails in town. Seasonal ingredients from our seleted local producers. Come to try our drinks, we have something for everyone. The most espectavuler brevages with the friendliest atmosphere! </br>Open seven days a week you can reserve a table now using the in-house booking system!!</p>
+</div>
+</div>
+</div>
+</section>
+{% endblock %}

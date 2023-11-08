@@ -36,3 +36,4 @@ def bookings_api():
     return jsonify(data_list), 200
 
 # to check the API is working: https://127.0.0.1:5000/bookings_API
+# making sure the port matches ours

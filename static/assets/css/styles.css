@@ -1,8 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
+:root {
+  --dark: #000000;
+  --white: #ffffff;
+  --accent: #d43533;
+  --gold: #a18224;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
+  background: var(--dark);
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  border: 1px solid var(--white);
+}
+
+.btn-primary:hover {
+  color: var(--accent);
+  background-color: var(--white);
+  border: 1px solid var(--accent);
 }
 
 .header,
@@ -11,15 +40,23 @@ body {
 }
 
 .nav-item {
-  margin-right: 15px;
+  margin-right: 0.9rem;
+}
+
+.c-gold {
+  color: var(--gold);
 }
 
 .bg-black {
-  background-color: #000;
+  background-color: var(--dark);
 }
 
 .bg-white {
-  background-color: #fff;
+  background-color: var(--white);
+}
+
+.border-gold {
+  border: 1px solid var(--gold);
 }
 
 .hero-section {
@@ -27,7 +64,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 20px 0 60px 0;
+  padding: 1.25rem 0 3.75rem 0;
   height: calc(100vh - 432px);
   display: flex;
   align-items: center;
@@ -36,7 +73,7 @@ body {
 }
 
 .b-radius {
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 .copy {
@@ -45,6 +82,10 @@ body {
 
 .centre {
   text-align: center;
+}
+
+.terms {
+  max-width: 400px;
 }
 
 /* media queries */

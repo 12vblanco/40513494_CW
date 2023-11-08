@@ -17,3 +17,5 @@ openingjs.forEach((openingHours) => {
   html += `<li style="list-style: none; text-align: left;"> ${openingHours} </li>`;
 });
 opening.innerHTML = html;
+// in this case is just to show the use of JavaScript in a flask application
+// but if the opening hours appeared in more than one place it would make sense to render them from one place only

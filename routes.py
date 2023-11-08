@@ -1,9 +1,10 @@
 import sqlite3
-from flask import session, render_template, redirect, url_for, flash, jsonify
+from flask import session, render_template, redirect, url_for, flash
 from app import app
 from datetime import date
 from form import BookingForm, AdminLogin
-
+from flask import Flask, flash, redirect, url_for
+from urllib import request
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -29,7 +30,8 @@ def index():
         
         if existing_booking:
             # message when the table is not available
-            flash('This table is not available!', 'danger')
+            # including variables from the DB as in https://stackoverflow.com/questions/71153840/how-to-flash-message-with-variables-in-flask
+            flash('Table {} is taken at {} - {}!'.format(table_num, time, booking_date), 'danger')
         else:
             # Save the booking if it's free
             cur.execute("INSERT INTO bookings (name, email, booking_date, time, table_num) VALUES (?, ?, ?, ?, ?)",
@@ -37,7 +39,7 @@ def index():
             con.commit()
             # While looking for a fix to multiple messages showing I came across with this post about seasons https://stackoverflow.com/questions/46270091/displaying-multiple-flash-messages-with-flask
             session['table_booked'] = True
-            flash('Your table has been booked!', 'success') 
+            flash('Table {} booked {} - {}!'.format(table_num, time, booking_date), 'success') 
             # and the message can appear only during the session avoiding the overlapping with success flash messages from admin
             session.pop('table_booked', None)
 
@@ -54,6 +56,10 @@ def contact():
 @app.route('/menu', methods=['GET'])
 def menu():
     return render_template('menu.html')
+
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -77,10 +83,8 @@ def admin():
             # and pass them to delete.html
             return render_template('delete.html', bookings=bookings)
         else: 
-            # if the login is not successful show a message
-            session['wrong_admin'] = True
-            flash('Introduce the right credentials', 'danger')
-            session.pop('wrong_admin', None)
+            # if the login is not successful show a message with the user name entered
+            flash('Introduce the right credentials {}'.format(user), 'danger')
         con.close()
     return render_template('admin.html', form2=form2)
 
@@ -89,15 +93,17 @@ def admin():
 def delete(booking_id):    
         con = sqlite3.connect('bookings.db')
         cur = con.cursor()
+        # delete the booking with the right id
         cur.execute("DELETE FROM bookings WHERE id=?", (booking_id,))
         con.commit()
-        session['delete_booking'] = True
+        # success message
         flash('Booking deleted!', 'success')
-        session.pop('wrong_admin', None)
+        # check if there are bookings and if not redirect to home
         cur.execute("SELECT * FROM bookings")
         bookings = cur.fetchall()
         if not bookings:
             con.close()
             return redirect(url_for('index'))            
         con.close()
+        # Stay if there are bookings
         return render_template('delete.html', bookings=bookings)

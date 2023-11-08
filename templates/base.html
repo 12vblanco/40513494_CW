@@ -23,7 +23,7 @@ documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheri
     <!-- Navigation & header -->
     <header
       id="header"
-      class="header bg-black text-white p-3 d-flex justify-content-between align-items-center"
+      class="header bg-black p-3 d-flex justify-content-between align-items-center border-gold"
     >
       <!-- Logo -->
       <a href="/"><img
@@ -49,7 +49,7 @@ documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheri
     <section id="content">{% block content %}{% endblock %}</section>
     <!-- Footer -->
     <footer
-      class="footer bg-black text-white p-3 flex-column justify-content-center align-items-center"
+      class="footer bg-black text-white p-3 flex-column justify-content-center align-items-center border-gold"
     >
       <div class="d-flex justify-content-between align-items-center">
         <!-- Opening hours -->
@@ -57,7 +57,7 @@ documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheri
           class="d-flex flex-column justify-content-center align-items-center"
           style="height: 200px"
         >
-          <strong class="centre">Opening Hours:</strong>
+          <strong class="c-gold">Opening Hours:</strong>
           <!-- Opening hours dynamically generated from a JavaScript file -->
           <ul class="openingjs">
         </div>
@@ -81,7 +81,7 @@ documentation https://flask.palletsprojects.com/en/2.3.x/patterns/templateinheri
       </div>
       <!-- Copyright information -->
       <div class="copy d-flex justify-content-center align-items-center">
-        2023 - All rights reserved
+        2023 - All rights reserved - <a href='/terms'>Terms of use</a>
       </div>
     </footer>
     <!-- JavaScript file -->
