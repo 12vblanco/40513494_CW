@@ -1,6 +1,6 @@
 from flask import Flask
 import os
-
+from models import *
 app = Flask(__name__)
 import routes
 import api
@@ -9,7 +9,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # secret key for the form, saved in environmental variables and fall back key for development
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
+database_uri = 'sqlite:///bookings.db'
 
+create_table()
 
 # running the app using https protocol for enhance security
 # https://kracekumar.com/post/54437887454/ssl-for-flask-local-development/

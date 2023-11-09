@@ -27,16 +27,22 @@ def create_table():
         password TEXT NOT NULL
     );
     """)
-    
+
     # add the admin user 
+    # create_admin()
+    
+    # End the connection
+    con.close()
+    
+def create_admin():
+    con = sqlite3.connect(db_location)
+    cur = con.cursor()
+    # Hardcoded admin credentials for demonstration
     user = 'Admin'
     password = 'password'
     cur = con.cursor()
     cur.execute("INSERT INTO admin (user, password) VALUES (?, ?)", (user, password))
     con.commit()
-        
-    # End the connection
-    con.close()
 
 # Execute the create table function
 create_table()

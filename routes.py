@@ -3,8 +3,7 @@ from flask import session, render_template, redirect, url_for, flash
 from app import app
 from datetime import date
 from form import BookingForm, AdminLogin
-from flask import Flask, flash, redirect, url_for
-from urllib import request
+from flask import flash, redirect, url_for
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -37,7 +36,8 @@ def index():
             cur.execute("INSERT INTO bookings (name, email, booking_date, time, table_num) VALUES (?, ?, ?, ?, ?)",
                   (name, email, booking_date, time, table_num))
             con.commit()
-            # While looking for a fix to multiple messages showing I came across with this post about seasons https://stackoverflow.com/questions/46270091/displaying-multiple-flash-messages-with-flask
+            # Using sessions as in the workbook and here https://stackoverflow.com/questions/46270091/displaying-multiple-flash-messages-with-flask
+            # to limit the spread of the flash message
             session['table_booked'] = True
             flash('Table {} booked {} - {}!'.format(table_num, time, booking_date), 'success') 
             # and the message can appear only during the session avoiding the overlapping with success flash messages from admin
@@ -109,7 +109,7 @@ def delete(booking_id):
         return render_template('delete.html', bookings=bookings)
 
 
-# Error handling from https://flask.palletsprojects.com/en/2.3.x/errorhandling/
+# Error handling from the workbook and https://flask.palletsprojects.com/en/2.3.x/errorhandling/
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404_error.html'), 404

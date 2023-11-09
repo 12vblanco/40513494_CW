@@ -7,6 +7,8 @@ from wtforms.widgets import PasswordInput
 
 
 # WTF form as in the documentation https://python-adv-web-apps.readthedocs.io/en/latest/flask_forms.html
+# the front end of the forms was done in HTML and bootstrap and the validation and security
+# was performed with wtforms
 class BookingForm(FlaskForm):
     
     name = StringField('Your name', validators=[DataRequired(), Length(2, 12)])

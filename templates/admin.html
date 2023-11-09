@@ -13,16 +13,14 @@
     <!-- to generate hidden fields for CSRF's https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/ -->
     {{ form2.hidden_tag() }}
     <div class="form-group">
-      {{ form2.user.label }} {{ form2.user(class="form-control", required=True)
-      }}
+      <label for='user'>Your name</label>
+      <input class='form-control' type='text' id='user' name='user' required></input>
     </div>
-    <!--form group bootstrap styling -->
     <div class="form-group">
-      <!--form label with attributes and bootstrap classes -->
-      {{ form2.password.label }} {{ form2.password(class="form-control",
-      required=True) }}
+      <label for='password'>Your name</label>
+      <input class='form-control' type='password' id='password' name='password' required></input>
     </div>
-    <div class="form-group">{{ form2.submit(class="btn btn-primary") }}</div>
+    <button type="submit" class="btn btn-primary">Login</button> 
   </form>
 </div>
 

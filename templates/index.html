@@ -5,7 +5,7 @@
   <div class="container p-3 mt-5 bg-white b-radius" style="width: 400px">
     <h2 class="f-res">BarBench Booking</h2>
 
-    <!-- Confirmation message for the bookings https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/ -->
+    <!-- Confirmation message for the bookings from workbook and https://flask.palletsprojects.com/en/2.3.x/patterns/flashing/ -->
     <!-- with bootstrap colour styles for the messages https://stackoverflow.com/questions/71804422/flash-messages-not-picking-up-bootstrap-styling -->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %}
@@ -17,19 +17,19 @@
       <!-- A hidden tag for wtforms to generate hidden tokens for CSRF's https://flask-wtf.readthedocs.io/en/0.15.x/quickstart/ -->
       {{ form.hidden_tag() }}
         <div class="form-group">
-            <label for='name'>Your name</label>
+            <label for='name' style="margin-bottom: 0.1rem">Your name</label>
             <input class='form-control' type='text' id='name' name='name' required></input>
         </div>
         <div class="form-group">
-            <label for='email'>Your email</label>
+            <label for='email' style="margin-bottom: 0.1rem">Your email</label>
             <input class='form-control' type='email' id='email' name='email' required></input>
         </div>
         <div class="form-group">
-            <label for='booking_date'>Which day?</label>
+            <label for='booking_date' style="margin-bottom: 0.1rem">Which day?</label>
             <input class='form-control' type='date' id='booking_date' name='booking_date' min={{current_date}} required></input>
         </div>
         <div class="form-group">
-            <label for='time'>What time?</label>
+            <label for='time' style="margin-bottom: 0.1rem">What time?</label>
             <select class='form-control' id='time' name='time' required><option value="13:00">13:00</option>
                 <option value="14:00">14:00</option>
                 <option value="15:00">15:00</option>
@@ -37,7 +37,7 @@
                 <option value="17:00">17:00</option></select>
         </div>
         <div class="form-group">
-            <label for="table_num">Choose table:</label>
+            <label for="table_num" style="margin-bottom: 0.1rem">Choose table:</label>
             <select id="table_num" name="table_num" class="form-control" required>
               <option value="1">1</option>
               <option value="2">2</option>
