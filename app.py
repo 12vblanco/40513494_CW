@@ -1,9 +1,13 @@
 from flask import Flask
 import os
-from models import *
 app = Flask(__name__)
 import routes
 import api
+
+# if the database needs to be created we can run create_table from here
+# from models import *
+# create_table()
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -11,7 +15,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
 database_uri = 'sqlite:///bookings.db'
 
-create_table()
 
 # running the app using https protocol for enhance security
 # https://kracekumar.com/post/54437887454/ssl-for-flask-local-development/
