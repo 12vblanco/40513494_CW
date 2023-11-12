@@ -1,23 +1,19 @@
 from flask import Flask
 import os
-
-
-def create_app():
-    app = Flask(__name__)
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    # secret key for the form, saved in environmental variables and fall back key for development
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
-    database_uri = 'sqlite:///bookings.db'
-    import routes
-    import api
+app = Flask(__name__)
+import routes
+import api
 
 # if the database needs to be created we can run create_table from here
 # from models import *
 # create_table()
 
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-
+# secret key for the form, saved in environmental variables and fall back key for development
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
+database_uri = 'sqlite:///bookings.db'
 
 
 # running the app using https protocol for enhance security
@@ -26,4 +22,5 @@ def create_app():
 
 # to run https: flask run --cert=server.crt --key=server.key
 # to run http: flask run 
-    return app
+if __name__ == '__main__':
+    app.run(debug=True)
