@@ -1,6 +1,6 @@
 import sqlite3
 from flask import jsonify
-from assignment import app
+from app import app
 
 # I created the route for the API in a separate file for clarity
 
