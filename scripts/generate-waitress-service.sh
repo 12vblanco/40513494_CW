@@ -10,8 +10,8 @@ After=network.target
 Type=simple
 User=root
 Group=root
-WorkingDirectory=/home/$USER/40514394
-ExecStart=/home/$USER/40514394/barBench/bin/waitress-serve --listen=127.0.0.1:8080 app:app
+WorkingDirectory=/home/$USER/40514394_CW
+ExecStart=/home/$USER/40514394_CW/barBench/bin/waitress-serve --listen=127.0.0.1:8080 app:app
 Restart=always
 
 [Install]
