@@ -11,7 +11,7 @@ Type=simple
 User=root
 Group=root
 WorkingDirectory=/home/$USER/40514394_CW
-ExecStart=/home/$USER/40514394_CW/barBench/bin/waitress-serve --listen=127.0.0.1:8080 app:app
+ExecStart=/home/$USER/40514394_CW/env/bin/waitress-serve --listen=127.0.0.1:5000 app:app
 Restart=always
 
 [Install]
