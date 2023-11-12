@@ -1,6 +1,6 @@
 import sqlite3
 from flask import session, render_template, redirect, url_for, flash
-from app import app
+from assignment import app
 from datetime import date
 from form import BookingForm, AdminLogin
 from flask import flash, redirect, url_for
