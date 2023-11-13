@@ -1,21 +1,23 @@
 from flask import Flask
 import os
+# import routes
+# import api
 
-app = Flask(__name__)
-import routes
-import api
+def create_app():
+    app = Flask(__name__)
+    
+    from routes import routes_blueprint
+    app.register_blueprint(routes_blueprint)
+
+    # basedir = os.path.abspath(os.path.dirname(__file__))
+# secret key for the form, saved in environmental variables and fall back key for development
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
+    # database_uri = 'sqlite:///bookings.db'
 
 # if the database needs to be created we can run create_table from here
 # from models import *
 # create_table()
-
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-# secret key for the form, saved in environmental variables and fall back key for development
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
-database_uri = 'sqlite:///bookings.db'
-
+    return app
 
 # running the app using https protocol for enhance security
 # https://kracekumar.com/post/54437887454/ssl-for-flask-local-development/
@@ -23,5 +25,6 @@ database_uri = 'sqlite:///bookings.db'
 
 # to run https: flask run --cert=server.crt --key=server.key
 # to run http: flask run 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app = create_app()
+    app.run(debug=True, host='0.0.0.0', port=8080)
