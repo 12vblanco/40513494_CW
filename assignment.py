@@ -1,5 +1,6 @@
 from flask import Flask
 import os
+
 app = Flask(__name__)
 import routes
 import api
@@ -22,5 +23,5 @@ database_uri = 'sqlite:///bookings.db'
 
 # to run https: flask run --cert=server.crt --key=server.key
 # to run http: flask run 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
