@@ -1,11 +1,11 @@
 import sqlite3
-from flask import session,Blueprint, render_template, redirect, url_for, flash
+from flask import session, render_template, redirect, url_for, flash
+from assignment import app
 from datetime import date
 from form import BookingForm, AdminLogin
+from flask import flash, redirect, url_for
 
-routes_blueprint = Blueprint('routes', __name__)
-
-@routes_blueprint.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = BookingForm()
     # check the current day to avoid booking past days https://stackoverflow.com/questions/32490629/getting-todays-date-in-yyyy-mm-dd-in-python
@@ -49,19 +49,19 @@ def index():
     return render_template('index.html', form=form, current_date=current_date)
 
 # the routes for the navigation to map and contact
-@routes_blueprint.route('/contact', methods=['GET'])
+@app.route('/contact', methods=['GET'])
 def contact():
     return render_template('contact.html')
 
-@routes_blueprint.route('/menu', methods=['GET'])
+@app.route('/menu', methods=['GET'])
 def menu():
     return render_template('menu.html')
 
-@routes_blueprint.route('/terms', methods=['GET'])
+@app.route('/terms', methods=['GET'])
 def terms():
     return render_template('terms.html')
 
-@routes_blueprint.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
     # then the same procedure to validate the admin login form
     form2 = AdminLogin()
@@ -89,7 +89,7 @@ def admin():
     return render_template('admin.html', form2=form2)
 
 # to delete the entries I adapted the code in https://stackoverflow.com/questions/25925024/how-to-delete-items-from-database-using-a-flask-framework
-@routes_blueprint.route('/delete/<int:booking_id>', methods=['POST'])
+@app.route('/delete/<int:booking_id>', methods=['POST'])
 def delete(booking_id):    
         con = sqlite3.connect('bookings.db')
         cur = con.cursor()
@@ -110,10 +110,10 @@ def delete(booking_id):
 
 
 # Error handling from the workbook and https://flask.palletsprojects.com/en/2.3.x/errorhandling/
-@routes_blueprint.errorhandler(404)
+@app.errorhandler(404)
 def page_not_found(error):
     return render_template('404_error.html'), 404
 
-@routes_blueprint.errorhandler(500)
+@app.errorhandler(500)
 def page_not_found(error):
     return render_template('404_error.html'), 500

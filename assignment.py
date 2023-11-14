@@ -1,24 +1,20 @@
 from flask import Flask
 import os
-
-def create_app():
-    app = Flask(__name__)
-    
-    # I tried blueprints to solve the problems I was having deploying https://flask.palletsprojects.com/en/2.3.x/blueprints/
-    from routes import routes_blueprint
-    app.register_blueprint(routes_blueprint)
-    from api import api_blueprint
-    app.register_blueprint(api_blueprint)
-
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    # secret key for the form, saved in environmental variables and fall back key for development
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
-    # database_uri = 'sqlite:///bookings.db'
+app = Flask(__name__)
+import routes
+import api
 
 # if the database needs to be created we can run create_table from here
 # from models import *
 # create_table()
-    return app
+
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+# secret key for the form, saved in environmental variables and fall back key for development
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
+database_uri = 'sqlite:///bookings.db'
+
 
 # running the app using https protocol for enhance security
 # https://kracekumar.com/post/54437887454/ssl-for-flask-local-development/
@@ -27,5 +23,4 @@ def create_app():
 # to run https: flask run --cert=server.crt --key=server.key
 # to run http: flask run 
 if __name__ == '__main__':
-    app = create_app()
-    app.run(host='0.0.0.0')
+    app.run(debug=True)
