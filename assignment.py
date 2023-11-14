@@ -1,16 +1,17 @@
 from flask import Flask
 import os
-# import routes
-# import api
 
 def create_app():
     app = Flask(__name__)
     
+    # I tried blueprints to solve the problems I was having deploying https://flask.palletsprojects.com/en/2.3.x/blueprints/
     from routes import routes_blueprint
     app.register_blueprint(routes_blueprint)
+    from api import api_blueprint
+    app.register_blueprint(api_blueprint)
 
-    # basedir = os.path.abspath(os.path.dirname(__file__))
-# secret key for the form, saved in environmental variables and fall back key for development
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    # secret key for the form, saved in environmental variables and fall back key for development
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
     # database_uri = 'sqlite:///bookings.db'
 
@@ -27,4 +28,4 @@ def create_app():
 # to run http: flask run 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0')

@@ -1,10 +1,11 @@
 import sqlite3
-from flask import jsonify
-from assignment import app
+from flask import jsonify, Blueprint
 
 # I created the route for the API in a separate file for clarity
 
-@app.route('/bookings_API')
+api_blueprint = Blueprint('api', __name__)
+
+@api_blueprint.route('/bookings_API')
 def bookings_api():    
     con = sqlite3.connect('bookings.db')
     cur = con.cursor()

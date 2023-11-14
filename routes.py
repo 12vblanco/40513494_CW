@@ -1,6 +1,5 @@
 import sqlite3
 from flask import session,Blueprint, render_template, redirect, url_for, flash
-# from assignment import app
 from datetime import date
 from form import BookingForm, AdminLogin
 
