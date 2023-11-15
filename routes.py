@@ -1,11 +1,12 @@
 import sqlite3
-from flask import session, render_template, redirect, url_for, flash
-from assignment import app
+from flask import session, render_template, redirect, url_for, flash, Blueprint
 from datetime import date
 from form import BookingForm, AdminLogin
 from flask import flash, redirect, url_for
 
-@app.route('/', methods=['GET', 'POST'])
+routes_blueprint = Blueprint('routes_blueprint', __name__)
+
+@routes_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     form = BookingForm()
     # check the current day to avoid booking past days https://stackoverflow.com/questions/32490629/getting-todays-date-in-yyyy-mm-dd-in-python
@@ -44,24 +45,24 @@ def index():
             session.pop('table_booked', None)
 
         con.close()
-        return redirect(url_for('index'))   
+        return redirect(url_for('routes_blueprint.index'))   
         
     return render_template('index.html', form=form, current_date=current_date)
 
 # the routes for the navigation to map and contact
-@app.route('/contact', methods=['GET'])
+@routes_blueprint.route('/contact', methods=['GET'])
 def contact():
     return render_template('contact.html')
 
-@app.route('/menu', methods=['GET'])
+@routes_blueprint.route('/menu', methods=['GET'])
 def menu():
     return render_template('menu.html')
 
-@app.route('/terms', methods=['GET'])
+@routes_blueprint.route('/terms', methods=['GET'])
 def terms():
     return render_template('terms.html')
 
-@app.route('/admin', methods=['GET', 'POST'])
+@routes_blueprint.route('/admin', methods=['GET', 'POST'])
 def admin():
     # then the same procedure to validate the admin login form
     form2 = AdminLogin()
@@ -89,7 +90,7 @@ def admin():
     return render_template('admin.html', form2=form2)
 
 # to delete the entries I adapted the code in https://stackoverflow.com/questions/25925024/how-to-delete-items-from-database-using-a-flask-framework
-@app.route('/delete/<int:booking_id>', methods=['POST'])
+@routes_blueprint.route('/delete/<int:booking_id>', methods=['POST'])
 def delete(booking_id):    
         con = sqlite3.connect('bookings.db')
         cur = con.cursor()
@@ -103,17 +104,17 @@ def delete(booking_id):
         bookings = cur.fetchall()
         if not bookings:
             con.close()
-            return redirect(url_for('index'))            
+            return redirect(url_for('routes_blueprint.index'))            
         con.close()
         # Stay if there are bookings
         return render_template('delete.html', bookings=bookings)
 
 
 # Error handling from the workbook and https://flask.palletsprojects.com/en/2.3.x/errorhandling/
-@app.errorhandler(404)
+@routes_blueprint.errorhandler(404)
 def page_not_found(error):
     return render_template('404_error.html'), 404
 
-@app.errorhandler(500)
+@routes_blueprint.errorhandler(500)
 def page_not_found(error):
     return render_template('404_error.html'), 500

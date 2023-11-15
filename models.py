@@ -1,5 +1,4 @@
 import sqlite3
-from flask import Flask, g
 
 db_location = 'bookings.db'
 

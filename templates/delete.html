@@ -33,7 +33,7 @@ endblock %} {%block content %}
           <td>
             <!-- delete button inspired by https://stackoverflow.com/questions/25925024/how-to-delete-items-from-database-using-a-flask-framework-->
             <form
-              action="{{ url_for('delete', booking_id=booking[0]) }}"
+              action="{{ url_for('routes_blueprint.delete', booking_id=booking[0]) }}"
               method="post"
             >
               <input type="submit" value="Delete" />
