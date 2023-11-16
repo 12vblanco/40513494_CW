@@ -3,13 +3,12 @@ import os
 import sqlite3
 
 
-# waitress was giving me a create_app error so I extracted factories from https://flask.palletsprojects.com/en/2.3.x/patterns/appfactories/
+# waitress was giving me a create_app error so I extracted factories and blueprints from https://flask.palletsprojects.com/en/2.3.x/patterns/appfactories/
 def create_app():
     app = Flask(__name__)
     # secret key for the form, saved in environmental variables and fall back key for development
-
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fall_back')
-
+    # and also blueprints from https://flask.palletsprojects.com/en/2.3.x/blueprints/
     from routes import routes_blueprint
     app.register_blueprint(routes_blueprint)
 
@@ -17,10 +16,6 @@ def create_app():
     app.register_blueprint(api_blueprint)
 
     return app
-
-# if the database needs to be created we can run create_table from here
-# from models import *
-# create_table()
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
