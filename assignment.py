@@ -17,6 +17,8 @@ def create_app():
 
     return app
 
+app = create_app()
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # running the app using https protocol for enhance security
@@ -29,3 +31,4 @@ if __name__ == '__main__':
     app = create_app()
     app.run(debug=True, ssl_context=('/server.crt', '/server.key'))  # for HTTPS
     # app.run(debug=True)  # for HTTP
+
