@@ -10,7 +10,7 @@ from wtforms.widgets import PasswordInput
 # was performed with wtforms
 class BookingForm(FlaskForm):
     
-    name = StringField('Your name', validators=[DataRequired(), Length(2, 12)])
+    name = StringField('Your name', validators=[DataRequired(), Length(2, 22)])
     email = StringField('Your email', validators=[DataRequired(), Email()])
     booking_date = StringField('Which day?', validators=[DataRequired()])
     #opening time choice 
