@@ -16,6 +16,9 @@ def create_app():
     app.register_blueprint(api_blueprint)
     
     # Error handling from the workbook and https://flask.palletsprojects.com/en/2.3.x/errorhandling/
+    # I notice last minute this wasn't working properly and I fix it by moving them out of the routes.py
+    # and into the main create app function. I notice this does not work in the deployed version 
+    # but I am worried that if I re-deploy I might run into problems again so I will leave it as it is
     @app.errorhandler(404)
     def not_found_error(error):
         return render_template('404_error.html'), 404
