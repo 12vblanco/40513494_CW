@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 import sqlite3
 
@@ -14,6 +14,15 @@ def create_app():
 
     from api import api_blueprint
     app.register_blueprint(api_blueprint)
+    
+    # Error handling from the workbook and https://flask.palletsprojects.com/en/2.3.x/errorhandling/
+    @app.errorhandler(404)
+    def not_found_error(error):
+        return render_template('404_error.html'), 404
+
+    @app.errorhandler(500)
+    def server_error(error):
+        return render_template('500_error.html'), 500
 
     return app
 

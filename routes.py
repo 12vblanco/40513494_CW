@@ -110,11 +110,4 @@ def delete(booking_id):
         return render_template('delete.html', bookings=bookings)
 
 
-# Error handling from the workbook and https://flask.palletsprojects.com/en/2.3.x/errorhandling/
-@routes_blueprint.errorhandler(404)
-def page_not_found(error):
-    return render_template('404_error.html'), 404
 
-@routes_blueprint.errorhandler(500)
-def page_not_found(error):
-    return render_template('404_error.html'), 500
