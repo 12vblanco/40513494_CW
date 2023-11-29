@@ -1,8 +1,7 @@
-##BarBench Table Reservation App
-==============================
+# BarBench Table Reservation App
 
-Introduction
-------------
+## Introduction
+
 BarBench is a table system application built into a fictional pub website as part of the Advanced Web Technologies module.
 
 Installation
